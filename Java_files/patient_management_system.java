@@ -1,5 +1,9 @@
-abstract login{
-	
+abstract class login{
+	int userid;
+	string password;
+	void login_verification(){
+		
+	}
 }
 class patients{
 		
