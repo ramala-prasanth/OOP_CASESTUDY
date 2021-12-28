@@ -83,14 +83,14 @@ public class Main{
 			admin.setAdminUsername("prasanth_r",0);
 			admin.setAdminUsername("lokesh_d",1);
 			admin.setAdminUsername("preetham_a",2);
-			admin.setAdminUsername("dheepthi_d",3);		
+			admin.setAdminUsername("dheepthi_d",3);			
 		
-		System.out.println("Welcome to JavaSoft systems!\nWhat would you like to do?\nChoose:\n1 for Administrator.\n2 for patients\n3 for Doctors\n4 to exit");
-		int choice=input.nextInt();
-		input.nextLine();
 		boolean flag=true;
 		while(flag==true)
 		{
+			System.out.println("Welcome to JavaSoft systems!\nWhat would you like to do?\nChoose:\n1 for Administrator.\n2 for patients\n3 for Doctors\n4 to exit");
+			int choice=input.nextInt();
+			input.nextLine();
 			boolean stat=true;
 			if(choice==1){
 				while(stat==true){
@@ -110,7 +110,7 @@ public class Main{
 						continue;
 					}
 					stat=false;
-				}				
+				};				
 			}
 		}
 		input.close();
