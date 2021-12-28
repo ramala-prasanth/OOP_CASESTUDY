@@ -1,6 +1,6 @@
 abstract class login{
 	int userid;
-	string password;
+	String password;
 	void login_verification();
 	
 		
