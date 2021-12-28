@@ -1,3 +1,6 @@
+class patients{
+		
+}
 public class patient_management_system
 {
 	public static void main(String[] args) {
