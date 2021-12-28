@@ -1,26 +1,13 @@
 import java.util.*;
-class login{
+abstract class login{
 	String username;
 	String password;
-	login(){
-		admin admim1=new admin();
-	}
-	protected int username_verification(String username){
-		for(int i=0;i<1000;i++){
-			if(username.equals(admin1.getAdminPassword(i))){
-				b=i;
-				break;
-				
-			}
-		}
-	}
-	protected boolean password_verification(int b){
-
-	}
+	abstract int username_verification(String username);
+	abstract int password_verification(String password);
 	
 }
 // class for patients which includes details like patient name, patient username, age, etc and also methods to get and set the data.
-class patient extends login{
+/*class patient extends login{
 		String[] patient_username=new String[1000];
 		String[] patient_password=new String [1000];
 		String[] patient_name=new String[1000];
@@ -35,14 +22,12 @@ class patient extends login{
 			this.patient_name[i] = newPatientName;
 		}
 		
-
-
-
-}
+}*/
 
 class admin extends login{
 		private String[] admin_username=new String[1000];
 		private String[] admin_password=new String[1000];
+		int c=-1;
 		void add_patients(){
 
 		}
@@ -63,15 +48,32 @@ class admin extends login{
 		void setAdminPassword(String newAdminPassword,int b){
 			this.admin_password[b] = newAdminPassword;
 		}
+		int username_verification(String username){
+			for(int i=0;i<1000;i++){
+				if(username.equals(getAdminUsername(i))){
+					c=i;
+					break;		
+				}
+			}
+			return c;
+		}
+		int password_verification(String password){
+			for(int i=0;i<1000;i++){
+				if(password.equals(getAdminPassword(i))){
+					c=i;
+					break;
+				}
+			}
+			return c;
+		}
 }
 
 public class Main{
 	public static void main(String[] args) {
 		Scanner input=new Scanner(System.in);
-		int b=0;
-		patient patient=new patient();
+		int verify;
+		//patient patient=new patient();
 		admin admin;
-		login login=new login();
 		admin=new admin();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
@@ -89,12 +91,26 @@ public class Main{
 		boolean flag=true;
 		while(flag==true)
 		{
+			boolean stat=true;
 			if(choice==1){
-				System.out.println("Enter your Username:");
-				String AdminUsername=input.nextLine();
-				b=login.username_verification(AdminUsername);
-				
-				
+				while(stat==true){
+					System.out.println("Enter your Username:");
+					String AdminUsername=input.nextLine();
+					verify=admin.username_verification(AdminUsername);
+					//System.out.println(verify);
+					if(verify==-1){
+						System.out.println("The Administrator does not exist!\nTry again!");
+						continue;
+					}
+					System.out.println("Enter your password:");
+					String AdminPassword=input.nextLine();
+					verify=admin.password_verification(AdminPassword);
+					if(verify==-1){
+						System.out.println("The password is incorrect! Try again!");
+						continue;
+					}
+					stat=false;
+				}				
 			}
 		}
 		input.close();
