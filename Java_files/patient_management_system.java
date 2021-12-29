@@ -110,7 +110,7 @@ public class Main{
 						continue;
 					}
 					stat=false;
-				};				
+				}				
 			}
 		}
 		input.close();
