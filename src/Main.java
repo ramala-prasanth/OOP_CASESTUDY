@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math;
 abstract class login{
 	String username;
 	String password;
@@ -15,7 +16,7 @@ class patient extends login{
 		String[] patient_phone=new String[1000];
 		String[] patient_gender=new String[1000];
 		String[] patient_email=new String[1000];
-
+		int c=-1;
 		//methods for basic details of patients.
 		void patient_name_ask(){
 			System.out.println("Enter the name of patient:");
@@ -31,6 +32,9 @@ class patient extends login{
 		}
 		void patient_email_ask(){
 			System.out.println("Enter the email of patient:");
+		}
+		void patient_password_ask(){
+			System.out.println("Enter the password of patient:");
 		}
 
 		//getter and setter methods for patient name
@@ -74,14 +78,77 @@ class patient extends login{
 			String number=String.valueOf(b);
 			patient_username[b]=dummy.concat(number);
 		}
-		
+		void password_generation(int b){
+			int randomPWD = (int)(Math.random()*90000);
+			patient_password[b]="PWD_"+randomPWD;
+		}
+		//getter and setter methods for patient username
+		String getPatientUsername(int b){
+			return patient_username[b];
+		}
+
+		//getter setter methods pateint password
+		String getPatientPassword(int b){
+			return patient_password[b];
+		}
+		void setPatientPassword(String newPatientPassword, int b){
+			this.patient_password[b]= newPatientPassword;
+		}
+		//method for displaying details.
+		void display_patient(int b){
+			System.out.println("Name: "+patient_name[b]);
+			System.out.println("Age: "+patient_age[b]);
+			System.out.println("Gender: "+patient_gender[b]);
+			System.out.println("Phone: "+patient_phone[b]);
+			System.out.println("Email: "+patient_email[b]);
+			System.out.println("Username: "+patient_username[b]);
+			System.out.println("Password: PWD_*****");
+		}
 		//methods for verifying patient username and password.
 		int username_verification(String username){
-
+			for(int i=0; i<1000;i++){
+				if(username.equals(getPatientUsername(i))){
+					c=i;
+					break;
+				}
+			}
+			return c;
+		}
+		int password_verification(String password){
+			for(int i=0; i<1000; i++){
+				if(password.equals(getPatientPassword(i))){
+					c=i;
+					break;
+				}
+			}
+			return c;
 		}
 		
 }
 
+// class for doctors containing basic details and methods for setting details and login verification.
+/*class doctor extends login{
+	String[] doctor_name=new String[1000];
+	String[] doctor_phone=new String[1000];
+	String[] doctor_email=new String[1000];
+	String[] doctor_username=new String[1000];
+	String[] doctor_password=new String[1000];
+	//methods for taking details of doctor
+	void doctor_name_ask(){
+		System.out.println("Enter the doctor's name");
+	}
+	void doctor_phone_ask(){
+		System.out.println("Enter the phone number of doctor");
+	}
+	void doctor_email_ask(){
+		System.out.println("Enter the email of doctor");
+	}
+
+	//methods for verifying doctor username and password
+	int username_verification(String username){
+		
+	}
+}*/
 //class for admin which inlcudes the admin username and password and methods for verifying the username and password.
 class admin extends login{
 		private String[] admin_username=new String[1000];
@@ -138,10 +205,12 @@ public class Main{
 			admin.setAdminUsername("lokesh_d",1);
 			admin.setAdminUsername("preetham_a",2);
 			admin.setAdminUsername("dheepthi_d",3);			
-		//creating duplicate names for new patients
+		//creating duplicate names for patients
 		for(int j=0;j<1000;j++){
 			patient.setPatientName("abcdefg",j);
 		}
+		//creating duplicate names for doctors
+		
 		boolean flag=true;
 		while(flag==true)
 		{
@@ -185,6 +254,17 @@ public class Main{
 							patient.setPatientAge(input.nextLine(),C);
 							patient.patient_gender_ask();
 							patient.setPatientGender(input.nextLine(),C);
+							patient.patient_phone_ask();
+							patient.setPatientPhone(input.nextLine(),C);
+							patient.patient_email_ask();
+							patient.setPatientEmail(input.nextLine(),C);		
+							patient.username_generation(C);
+							patient.password_generation(C);
+							System.out.println("Patient added successfully\n\n");
+							patient.display_patient(C);							
+						}
+						if(choice==2){
+
 						}
 						if(choice==10){
 							break;
