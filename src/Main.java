@@ -183,6 +183,8 @@ public class Main{
 							patient.setPatientName(input.nextLine(),C);
 							patient.patient_age_ask();
 							patient.setPatientAge(input.nextLine(),C);
+							patient.patient_gender_ask();
+							patient.setPatientGender(input.nextLine(),C);
 						}
 						if(choice==10){
 							break;
