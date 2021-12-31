@@ -127,12 +127,13 @@ class patient extends login{
 }
 
 // class for doctors containing basic details and methods for setting details and login verification.
-/*class doctor extends login{
+class doctor extends login{
 	String[] doctor_name=new String[1000];
 	String[] doctor_phone=new String[1000];
 	String[] doctor_email=new String[1000];
 	String[] doctor_username=new String[1000];
 	String[] doctor_password=new String[1000];
+	int c=-1;
 	//methods for taking details of doctor
 	void doctor_name_ask(){
 		System.out.println("Enter the doctor's name");
@@ -143,12 +144,80 @@ class patient extends login{
 	void doctor_email_ask(){
 		System.out.println("Enter the email of doctor");
 	}
+	void doctor_password_ask(){
+		System.out.println("Enter the password of doctor");
+	}
+	//getter and setter methods for doctor name.
+	String getDoctorName(int b){
+		return doctor_name[b];
+	}
+	void setDoctorName(String newDoctorName,int b){
+		this.doctor_name[b]= newDoctorName;
+	}
 
+	//getter and setter methods for doctor phone
+	String getDoctorPhone(int b){
+		return doctor_phone[b];
+	}
+	void setDoctorPhone(String newDoctorPhone,int b){
+		this.doctor_phone[b]= newDoctorPhone;
+	}
+
+	//getter and setter methods for doctor Email
+	String getDoctorEmail(int b){
+		return doctor_email[b];
+	}
+	void setDoctorEmail(String newDoctorEmail,int b){
+		this.doctor_email[b]= newDoctorEmail;
+	}
+
+	//getter and setter methods for doctor username
+	String getDoctorUsername(int b){
+		return doctor_username[b];
+	}
+	void setDoctorUsername(String newDoctorUsername,int b){
+		this.doctor_username[b]= newDoctorUsername;
+	}
+
+	//getter and setter methods for doctor password
+	String getDoctorPassword(int b){
+		return doctor_password[b];
+	}
+	void setDoctorPassword(String newDoctorPassword, int b){
+		this.doctor_password[b]=newDoctorPassword;
+	}
+
+	//geneation of username and password
+	void username_generation(String username,int b){
+		String dummy="JD00";
+		String number=String.valueOf(b);
+		doctor_username[b]=dummy.concat(number);
+	}
+	void password_generation(String password,int b){
+		int randomPWD = (int)(Math.random()*90000);
+		doctor_password[b]="PWD_"+randomPWD;
+	}
 	//methods for verifying doctor username and password
 	int username_verification(String username){
-		
+		for(int i=0; i<1000;i++){
+			if(username.equals(getDoctorUsername(i))){
+				c=i;
+				break;
+			}
+		}
+		return c;
 	}
-}*/
+
+	int password_verification(String password){
+		for(int i=0; i<1000;i++){
+			if(password.equals(getDoctorPassword(i))){
+				c=i;
+				break;
+			}			
+		}
+		return c;
+	}
+}
 //class for admin which inlcudes the admin username and password and methods for verifying the username and password.
 class admin extends login{
 		private String[] admin_username=new String[1000];
@@ -196,6 +265,7 @@ public class Main{
 		patient patient=new patient();
 		admin admin;
 		admin=new admin();
+		doctor doctor=new doctor();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
 				admin.setAdminUsername("abcedf",j);
@@ -210,7 +280,9 @@ public class Main{
 			patient.setPatientName("abcdefg",j);
 		}
 		//creating duplicate names for doctors
-		
+		for(int j=0;j<1000;j++){
+			doctor.setDoctorName("abcdefgh",j);
+		}
 		boolean flag=true;
 		while(flag==true)
 		{
