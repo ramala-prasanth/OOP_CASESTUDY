@@ -1,14 +1,20 @@
 import java.util.*;
 import java.lang.Math;
-abstract class login{
-	String username;
-	String password;
+interface login{
+	String username="";
+	String password="";
 	abstract int username_verification(String username);
-	abstract int password_verification(String password);
-	
+	abstract int password_verification(String password);	
+}
+class Appointments{
+	String[] appointment_time=new String[1000];
+	String[] appointment_date=new String[1000];	
+	public void setappointment(int j,String date,String time){
+
+	}
 }
 // class for patients which includes details like patient name, patient username, age, etc and also methods to get and set the data.
-class patient extends login{
+class patient extends Appointments implements login{
 		String[] patient_username=new String[1000];
 		String[] patient_password=new String [1000];
 		String[] patient_name=new String[1000];
@@ -16,6 +22,8 @@ class patient extends login{
 		String[] patient_phone=new String[1000];
 		String[] patient_gender=new String[1000];
 		String[] patient_email=new String[1000];
+		String[] appointment_time=new String[1000];
+		String[] appointment_date=new String[1000];
 		int c=-1;
 		//methods for basic details of patients.
 		void patient_name_ask(){
@@ -94,6 +102,7 @@ class patient extends login{
 		void setPatientPassword(String newPatientPassword, int b){
 			this.patient_password[b]= newPatientPassword;
 		}
+		
 		//method for displaying details.
 		void display_patient(int b){
 			System.out.println("Name: "+patient_name[b]);
@@ -104,8 +113,14 @@ class patient extends login{
 			System.out.println("Username: "+patient_username[b]);
 			System.out.println("Password: PWD_*****");
 		}
+		void display_appointment(int b) {
+			System.out.println("Username: "+patient_username[b]);
+			System.out.println("Apointment date: "+appointment_date[b]);
+			System.out.println("Apointment time: "+appointment_time[b]);
+		}
+
 		//methods for verifying patient username and password.
-		int username_verification(String username){
+		public int username_verification(String username){
 			for(int i=0; i<1000;i++){
 				if(username.equals(getPatientUsername(i))){
 					c=i;
@@ -114,7 +129,7 @@ class patient extends login{
 			}
 			return c;
 		}
-		int password_verification(String password){
+		public int password_verification(String password){
 			for(int i=0; i<1000; i++){
 				if(password.equals(getPatientPassword(i))){
 					c=i;
@@ -127,12 +142,13 @@ class patient extends login{
 }
 
 // class for doctors containing basic details and methods for setting details and login verification.
-class doctor extends login{
+class doctor extends Appointments implements login{
 	String[] doctor_name=new String[1000];
 	String[] doctor_phone=new String[1000];
 	String[] doctor_email=new String[1000];
 	String[] doctor_username=new String[1000];
 	String[] doctor_password=new String[1000];
+	String[] doctor_department=new String[1000];
 	int c=-1;
 	//methods for taking details of doctor
 	void doctor_name_ask(){
@@ -146,6 +162,9 @@ class doctor extends login{
 	}
 	void doctor_password_ask(){
 		System.out.println("Enter the password of doctor");
+	}
+	void doctor_department_ask(){
+		System.out.println("Enter the department of doctor");
 	}
 	//getter and setter methods for doctor name.
 	String getDoctorName(int b){
@@ -187,18 +206,34 @@ class doctor extends login{
 		this.doctor_password[b]=newDoctorPassword;
 	}
 
+	//getter and setter methods for doctor department
+	String getDoctorDepartment(int b){
+		return doctor_department[b];
+	}
+	void setDoctorDepartment(String newDoctorDepartment,int b){
+		this.doctor_department[b]=newDoctorDepartment;
+	}
 	//geneation of username and password
-	void username_generation(String username,int b){
+	void username_generation(int b){
 		String dummy="JD00";
 		String number=String.valueOf(b);
 		doctor_username[b]=dummy.concat(number);
 	}
-	void password_generation(String password,int b){
+	void password_generation(int b){
 		int randomPWD = (int)(Math.random()*90000);
 		doctor_password[b]="PWD_"+randomPWD;
 	}
+	//Methods for displaying details of doctor
+	void display_doctor(int b){
+		System.out.println("Name: "+doctor_name[b]);
+		System.out.println("Department: "+doctor_department[b]);
+		System.out.println("Email: "+doctor_email[b]);
+		System.out.println("Phone: "+doctor_phone[b]);
+		System.out.println("Username: "+doctor_username[b]);
+		System.out.println("Password: PWD_***");
+	}
 	//methods for verifying doctor username and password
-	int username_verification(String username){
+	public int username_verification(String username){
 		for(int i=0; i<1000;i++){
 			if(username.equals(getDoctorUsername(i))){
 				c=i;
@@ -208,7 +243,7 @@ class doctor extends login{
 		return c;
 	}
 
-	int password_verification(String password){
+	public int password_verification(String password){
 		for(int i=0; i<1000;i++){
 			if(password.equals(getDoctorPassword(i))){
 				c=i;
@@ -219,7 +254,7 @@ class doctor extends login{
 	}
 }
 //class for admin which inlcudes the admin username and password and methods for verifying the username and password.
-class admin extends login{
+class admin implements login{
 		private String[] admin_username=new String[1000];
 		private String[] admin_password=new String[1000];
 		int c=-1;
@@ -238,7 +273,7 @@ class admin extends login{
 			this.admin_password[b] = newAdminPassword;
 		}
 		//admin username and password verification.
-		int username_verification(String username){
+		public int username_verification(String username){
 			for(int i=0;i<1000;i++){
 				if(username.equals(getAdminUsername(i))){
 					c=i;
@@ -247,7 +282,7 @@ class admin extends login{
 			}
 			return c;
 		}
-		int password_verification(String password){
+		public int password_verification(String password){
 			for(int i=0;i<1000;i++){
 				if(password.equals(getAdminPassword(i))){
 					c=i;
@@ -336,7 +371,24 @@ public class Main{
 							patient.display_patient(C);							
 						}
 						if(choice==2){
-
+							for(int j=0;j<1000;j++){
+								if(doctor.getDoctorName(j).equals("abcdefgh")){
+									C=j;
+									break;
+								}
+							}
+							doctor.doctor_name_ask();
+							doctor.setDoctorName(input.nextLine(),C);
+							doctor.doctor_phone_ask();
+							doctor.setDoctorPhone(input.nextLine(),C);
+							doctor.doctor_email_ask();
+							doctor.setDoctorEmail(input.nextLine(),C);
+							doctor.doctor_department_ask();
+							doctor.setDoctorDepartment(input.nextLine(),C);
+							doctor.username_generation(C);
+							doctor.password_generation(C);
+							System.out.println("Doctor added successfully.\n\n");
+							doctor.display_doctor(C);
 						}
 						if(choice==10){
 							break;
@@ -346,7 +398,71 @@ public class Main{
 					stat=false;
 				}	
 				
-							
+				if(choice==2) {
+					System.out.println("Please choose:\n1 if you are logging in for the first time.\nElse press any other key.");
+					int ch=input.nextInt();
+					input.nextLine();
+					if(ch==1){
+						while(true){
+							B=-1;
+							System.out.println("Please enter your phone number to continue.");
+							String phone=input.nextLine();
+							for(int i=0;i<1000;i++){
+								if(phone.equals(patient.getPatientPhone(i))){
+									B=i;
+									break;
+								}
+							}
+							if(B==-1){
+								System.out.println("The phone number you entered doesnt match with our records.\nPlease try again!");
+								continue;
+							}
+							System.out.println("Enter the username and password displayed here:");
+							System.out.println("Username: "+patient.getPatientUsername(B));
+							String inputUsername=input.nextLine();
+							System.out.println("Password: "+patient.getPatientPassword(B));
+							String inputPassword=input.nextLine();
+							if(B==patient.username_verification(inputUsername) && B==patient.password_verification(inputPassword)){
+								System.out.println("Login Successful!");
+							}					
+						}						
+					}
+					System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Edit your detials.\n4.Get doctor details.\n10.Exit.\n");				
+					ch=input.nextInt();
+					if(ch==1){
+						System.out.println("Enter the date and time in the same line.\nExample:\nDD/MM/YY HH:MM\nPlease enter date in 24 hr format!");
+						while(true){
+							patient.setappointment(B,input.nextLine(),input.nextLine());
+							if()
+							System.out.println("Do you want to book another appointment? Yes/No \n");
+							String c=input.nextLine();
+							if(c=="No" || c=="no" || c=="NO"){
+							break;
+							}
+						}				
+											
+					}		
+			  
+				
+				
+				}
+					  if(ch==2) {
+							System.out.println("Enter the username:");
+							String uName=input.nextLine();
+							for(int j=0;j<1000;j++){
+								if(patient.patient_username[j].equals(uName)) {
+									int C=j;
+									patient.display_appointment(C);
+									break;
+								}
+								else {
+									System.out.println("Not Found");
+									break;
+								}
+				
+					
+						   }
+					  }				
 			}
 			if(choice==4){
 				flag=false;
