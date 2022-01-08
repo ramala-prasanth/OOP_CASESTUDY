@@ -13,6 +13,35 @@ class Appointments{
 
 	}
 }
+//class for prescriptions and lab reports
+class prescriptions_labtest{
+	Scanner input=new Scanner(System.in);
+    String medicine_name;
+    String medicine_dosage;
+    String test_name;
+    
+
+    public void name_ask(){
+        System.out.println("Enter the medicine name:");
+        medicine_name=input.next();
+    }
+    public void dosage_ask(){
+        System.out.println("Enter the dosage:");
+        medicine_dosage=input.next();
+    }
+    public void test_name_ask(){
+        System.out.println("Enter the test_name:");
+        test_name=input.next();
+    }
+    public void display() {
+    	System.out.println("The medicine name is");
+        System.out.println(medicine_name);
+        System.out.println("dosage is:");
+        System.out.println(medicine_dosage);
+        System.out.println("And test name is:");
+        System.out.println(test_name);
+    }
+}
 // class for patients which includes details like patient name, patient username, age, etc and also methods to get and set the data.
 class patient extends Appointments implements login{
 		String[] patient_username=new String[1000];
@@ -25,6 +54,12 @@ class patient extends Appointments implements login{
 		String[] appointment_time=new String[1000];
 		String[] appointment_date=new String[1000];
 		int c=-1;
+		//methods for editing the details for patient
+		void patient_edit(){
+			System.out.println("Please enter:");
+			System.out.println("1 if you want to change your username.");
+			System.out.println("2 if you want to change your password.");
+		}
 		//methods for basic details of patients.
 		void patient_name_ask(){
 			System.out.println("Enter the name of patient:");
@@ -93,6 +128,9 @@ class patient extends Appointments implements login{
 		//getter and setter methods for patient username
 		String getPatientUsername(int b){
 			return patient_username[b];
+		}
+		void setPatientUsername(String newPatientUsername,int b){
+			this.patient_username[b]=newPatientUsername;
 		}
 
 		//getter setter methods pateint password
@@ -325,8 +363,9 @@ public class Main{
 			int choice=input.nextInt();
 			input.nextLine();
 			boolean stat=true;
+			//ADMIN
 			if(choice==1){
-				while(stat==true){
+				while(true){
 					System.out.println("Enter your Username:");
 					String AdminUsername=input.nextLine();
 					B=admin.username_verification(AdminUsername);
@@ -394,11 +433,11 @@ public class Main{
 							break;
 						}
 					}
-					
-					stat=false;
+					break;
 				}	
-				
-				if(choice==2) {
+			}
+			//PATIENT
+			if(choice==2) {
 					System.out.println("Please choose:\n1 if you are logging in for the first time.\nElse press any other key.");
 					int ch=input.nextInt();
 					input.nextLine();
@@ -424,17 +463,18 @@ public class Main{
 							String inputPassword=input.nextLine();
 							if(B==patient.username_verification(inputUsername) && B==patient.password_verification(inputPassword)){
 								System.out.println("Login Successful!");
-							}					
+							}	
+							break;				
 						}						
 					}
-					System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Edit your detials.\n4.Get doctor details.\n10.Exit.\n");				
+					System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Change username and password.\n4.Get doctor details.\n10.Exit.\n");				
 					ch=input.nextInt();
 					input.nextLine();
 					if(ch==1){
 						System.out.println("Enter the date and time in the same line.\nExample:\nDD/MM/YY HH:MM\nPlease enter time in 24 hr format!");
 						while(true){
 							patient.setappointment(B,input.nextLine(),input.nextLine());
-							if(patinet.)
+							//if(patinet.)
 							System.out.println("Do you want to book another appointment? Yes/No \n");
 							String c=input.nextLine();
 							if(c=="No" || c=="no" || c=="NO"){
@@ -442,29 +482,37 @@ public class Main{
 							}
 						}				
 											
-					}		
-			  
+					}	
+					if(ch==2) {
+						System.out.println("Enter the username:");
+						String uName=input.nextLine();
+						for(int j=0;j<1000;j++){
+							if(patient.patient_username[j].equals(uName)) {
+								int C=j;
+								patient.display_appointment(C);
+								break;
+							}
+							else {
+								System.out.println("Not Found");
+								break;
+							}
+			
 				
-				
-				}
-					  if(ch==2) {
-							System.out.println("Enter the username:");
-							String uName=input.nextLine();
-							for(int j=0;j<1000;j++){
-								if(patient.patient_username[j].equals(uName)) {
-									int C=j;
-									patient.display_appointment(C);
-									break;
-								}
-								else {
-									System.out.println("Not Found");
-									break;
-								}
-				
-					
-						   }
-					  }				
-			}
+					   }
+				  }
+				  if(ch==3){
+					patient.patient_edit();
+					int opt=input.nextInt();
+					input.nextLine();
+					System.out.println("Enter the new username to be changed.");
+					String changeUsername=input.nextLine();
+					System.out.println("Enter the new password to be changed.");
+					String changePassword=input.nextLine();
+					patient.setPatientUsername(changeUsername,B);
+					System.out.println("Username and password changed succesfuly.");						
+				  }	  			  
+				}				  				
+			// DOCTOR
 			if(choice==3){
 				System.out.println("Please choose:\n1 if you are logging in for the first time.\nElse press any other key.");
 				int ch=input.nextInt();
@@ -494,6 +542,9 @@ public class Main{
 						}					
 					}		
 				}
+				System.out.println("What would you like to do?");
+				System.out.println("Enter:\n1 to ")
+
 
 			}
 			if(choice==4){
