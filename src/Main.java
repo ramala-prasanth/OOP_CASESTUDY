@@ -429,11 +429,12 @@ public class Main{
 					}
 					System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Edit your detials.\n4.Get doctor details.\n10.Exit.\n");				
 					ch=input.nextInt();
+					input.nextLine();
 					if(ch==1){
-						System.out.println("Enter the date and time in the same line.\nExample:\nDD/MM/YY HH:MM\nPlease enter date in 24 hr format!");
+						System.out.println("Enter the date and time in the same line.\nExample:\nDD/MM/YY HH:MM\nPlease enter time in 24 hr format!");
 						while(true){
 							patient.setappointment(B,input.nextLine(),input.nextLine());
-							if()
+							if(patinet.)
 							System.out.println("Do you want to book another appointment? Yes/No \n");
 							String c=input.nextLine();
 							if(c=="No" || c=="no" || c=="NO"){
@@ -463,6 +464,37 @@ public class Main{
 					
 						   }
 					  }				
+			}
+			if(choice==3){
+				System.out.println("Please choose:\n1 if you are logging in for the first time.\nElse press any other key.");
+				int ch=input.nextInt();
+				input.nextLine();
+				if(ch==1){
+					while(true){
+						B=-1;
+						System.out.println("Please enter your phone number to continue.");
+						String phone=input.nextLine();
+						for(int i=0;i<1000;i++){
+							if(phone.equals(doctor.getDoctorPhone(i))){
+								B=i;
+								break;
+							}
+						}
+						if(B==-1){
+							System.out.println("The phone number you entered doesnt match with our records.\nPlease try again!");
+							continue;
+						}
+						System.out.println("Enter the username and password displayed here:");
+						System.out.println("Username: "+doctor.getDoctorUsername(B));
+						String inputUsername=input.nextLine();
+						System.out.println("Password: "+doctor.getDoctorPassword(B));
+						String inputPassword=input.nextLine();
+						if(B==doctor.username_verification(inputUsername) && B==doctor.password_verification(inputPassword)){
+							System.out.println("Login Successful!");
+						}					
+					}		
+				}
+
 			}
 			if(choice==4){
 				flag=false;
