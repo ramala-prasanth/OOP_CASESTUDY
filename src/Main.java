@@ -370,7 +370,7 @@ class doctor extends Appointments implements login {
 
 // class for admin which inlcudes the admin username and password and methods
 // for verifying the username and password.
-static class admin implements login {
+class admin implements login {
 	private String[] admin_username = new String[1000];
 	private String[] admin_password = new String[1000];
 	int c = -1;
@@ -420,8 +420,8 @@ public class Main {
 		Scanner input=new Scanner(System.in);
 		int B;
 		patient patient=new patient();
-		admin admin=new admin();
 		doctor doctor=new doctor();
+		admin admin=doctor.new admin();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
 				admin.setAdminUsername("abcedf",j);
