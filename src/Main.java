@@ -701,7 +701,27 @@ public class Main {
 						}
 						while(true){
 							System.out.println("What would you like to do?");
-							System.out.println("Enter:\n1 to ");
+							System.out.println("Enter:\n1 to change username and password\n2 for prescribing medicines\n3 for prescribing lab tests.\n10 to go back to the main menu");
+						ch=input.nextInt();
+						input.nextLine();
+						if(ch==1){
+							System.out.println("Enter the new username to be changed.");
+							String changeUsername=input.nextLine();
+							System.out.println("Enter the new password to be changed.");
+							String changePassword=input.nextLine();
+							doctor.setDoctorUsername(changeUsername,B);
+							doctor.setDoctorPassword(changePassword,B);
+							System.out.println("Username and password changed succesfuly.");
+						}
+						if(ch==2){
+
+						}
+						if(ch==3){
+
+						}
+						if(ch==10){
+							break;
+						}
 						}					
 					}		
 				}
