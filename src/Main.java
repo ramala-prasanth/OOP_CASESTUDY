@@ -15,43 +15,127 @@ class Appointments {
 	String[] appointment_date = new String[1000];
 	String[] illness=new String[1000];
 	String[] Doctor_name=new String[1000];
-	public void setappointment(int j,String date,String time,String illness,String DName){
-		this.appointment_time[j]=time;
-		this.appointment_date[j]=date;
-		this.illness[j]=illness;
-		this.Doctor_name[j]=DName;
+	void initialValues(){
+		for(int i=0;i<1000;i++){
+			appointment_time[i]="";
+			appointment_date[i]="";
+			illness[i]="";
+			Doctor_name[i]="";
+		}
+	}
+	public void setappointment(int j,String date,String time,String disease,String DName){
+		this.appointment_time[j]=appointment_time[j]+time;
+		this.appointment_date[j]=appointment_date[j]+date;
+		this.illness[j]= illness[j]+disease;
+		this.Doctor_name[j]=Doctor_name[j]+DName;
    }
 }
 
+//class for diagnosis.
+class diagnosis{
+    String[] disease= new String[1000];
+    String[] symptoms=new String[1000];
+	void initValues(){
+		for(int i=0;i<1000;i++){
+			disease[i]="";
+			symptoms[i]="";
+		}
+	}
+
+    public void disease_ask(int b){
+        Scanner s= new Scanner (System.in);
+        System.out.println("Enter the disease:");
+        this.disease[b]=disease[b]+s.nextLine();
+		s.close();
+    }
+    public void symptoms_ask(int b){
+        Scanner s= new Scanner (System.in);
+        System.out.println("Enter the symptoms:");
+        this.symptoms[b]=symptoms[b]+s.nextLine();
+		s.close();
+    }
+    public void display() {
+    	System.out.println("The disease is");
+        System.out.println(disease);
+        System.out.println("And symptoms are");
+        System.out.println(symptoms);
+    }
+}
 // class for prescriptions and lab reports
-class prescriptions_labtest {
+class prescriptions_labtest extends diagnosis {
 	Scanner input = new Scanner(System.in);
-	String medicine_name;
-	String medicine_dosage;
-	String test_name;
+	String[] medicine_name = new String[1000];
+	String[] medicine_dosage = new String[1000];
+	float[] medicine_cost= new float[1000];
+	String[] test_name = new String[1000];
+	String[] test_cost = new String[1000];
+	String[] lab_test = new String[10];
+	float lab_cost[] = new float[10];
 
-	public void name_ask() {
+	void intialize(){
+		for(int i=0;i<1000;i++){
+			medicine_name[i] = "";
+			medicine_dosage[i]="";
+			test_name[i]="";
+		}
+		lab_test[0]="Blood Test";
+		lab_test[1]="Urine Test";
+		lab_test[2]="Thyroid Test";
+		lab_test[3]="Diabetes Test";
+		lab_cost[0]=1500;
+		lab_cost[1]=2499;
+		lab_cost[2]=3333;
+		lab_cost[3]=1250;
+	}
+	
+
+	public void name_ask(int b) {
 		System.out.println("Enter the medicine name:");
-		medicine_name = input.next();
+		this.medicine_name[b] = medicine_name[b]+input.nextLine();
 	}
 
-	public void dosage_ask() {
+	public void dosage_ask(int b) {
 		System.out.println("Enter the dosage:");
-		medicine_dosage = input.next();
+		this.medicine_dosage[b] = medicine_dosage[b]+input.nextLine();
 	}
 
-	public void test_name_ask() {
-		System.out.println("Enter the test_name:");
-		test_name = input.next();
+	public void test_name_ask(int b) {
+		System.out.println("Enter the test number");
+		this.test_name[b] = test_name[b]+input.nextLine();
 	}
 
-	public void display() {
-		System.out.println("The medicine name is");
-		System.out.println(medicine_name);
+	public void display_prescription(int b) {
+		patient patient_new = new patient();
+		System.out.println("Name of the patient: "+patient_new.getPatientName(b));
+		System.out.println("------------------------------------------------------------------------------------------------");
+		System.out.println("Medicine\t\t\tDosage");
+		String[] arrMedicine = medicine_name[b].split(" ",0);
+		String[] arrDosage = medicine_dosage[b].split(" ",0);
+		for(int i=0; i<arrDosage.length; i++){
+			System.out.println(arrMedicine[i]+"\t\t\t"+arrDosage[i]);
+		}
+
+		/*System.out.println("The medicine name is");
+		System.out.println(medicine_name[b]);
 		System.out.println("dosage is:");
-		System.out.println(medicine_dosage);
+		System.out.println(medicine_dosage[b]);
 		System.out.println("And test name is:");
-		System.out.println(test_name);
+		System.out.println(test_name[b]);*/
+	}
+	void display_labreport(int b, int lab_no){
+		patient patient_new = new patient();
+		if(lab_no==0){
+			System.out.println("-----------------------------------------------------------------------------------------");
+			System.out.println("Patient Name: "+patient_new.getPatientName(b));
+			System.out.println("Test name: "+test_name[b]);
+			System.out.println("Haem");
+		}
+		if(lab_no==1){
+
+		}
+		if(lab_no==2){
+
+		}
 	}
 }
 
@@ -65,8 +149,8 @@ class patient extends Appointments implements login {
 	String[] patient_phone = new String[1000];
 	String[] patient_gender = new String[1000];
 	String[] patient_email = new String[1000];
-	String[] appointment_time = new String[1000];
-	String[] appointment_date = new String[1000];
+	//String[] appointment_time = new String[1000];
+	//String[] appointment_date = new String[1000];
 	int c = -1;
 
 	// methods for editing the details for patient
@@ -189,10 +273,19 @@ class patient extends Appointments implements login {
 
 	void display_appointment(int b) {
 		System.out.println("Username: " + patient_username[b]);
-		System.out.println("Apointment date: " + appointment_date[b]);
+		System.out.println("-----------------------------------------------------------------");
+		String[] arrDate= appointment_date[b].split(" ",0);
+		String[] arrTime= appointment_time[b].split(" ",0);
+		String[] arrIllness= illness[b].split(" ",0);
+		String[] arrDoctor= Doctor_name[b].split(" ",0);
+		System.out.println("Apointment date\t\tAppointment Time\t\tIllness\t\tDoctor Name");
+		for(int i=0;i<arrDate.length;i++){
+			System.out.println(arrDate[i]+"\t\t"+arrTime[i]+"\t\t"+arrIllness[i]+"\t\t"+arrDoctor[i]);
+		}
+		/*System.out.println("Apointment date: " + appointment_date[b]);
 		System.out.println("Apointment time: " + appointment_time[b]);
 		System.out.println("Illness : "+illness[b]);
-		System.out.println("Name of the doctor : "+Doctor_name[b]);
+		System.out.println("Name of the doctor : "+Doctor_name[b]);*/
 	}
 
 	// methods for verifying patient username and password.
@@ -424,7 +517,13 @@ public class Main {
 		patient patient=new patient();
 		doctor doctor=new doctor();
 		admin admin=doctor.new admin();
-		//Appointments appointment=new Appointments();
+		Appointments appointment=new Appointments();
+		diagnosis diagnosis = new diagnosis();
+		prescriptions_labtest prescriptions = new prescriptions_labtest();
+		diagnosis.initValues();
+		prescriptions.intialize();
+		//callling method to set appointment details to null 
+		appointment.initialValues();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
 				admin.setAdminUsername("abcedf",j);
@@ -442,6 +541,22 @@ public class Main {
 		for(int j=0;j<1000;j++){
 			doctor.setDoctorName("abcdefgh",j);
 		}
+		//creating three doctors...
+		doctor.setDoctorName("James Mathew",0);
+		doctor.setDoctorPhone("1029384756",0);
+		doctor.setDoctorEmail("james_m@gmail.com",0);
+		doctor.setDoctorDepartment("Cardiology",0);
+
+		doctor.setDoctorName("Lila Das",1);
+		doctor.setDoctorPhone("9652744412",1);
+		doctor.setDoctorEmail("lila_das@gmail.com",1);
+		doctor.setDoctorDepartment("gastroenterology",1);
+
+		doctor.setDoctorName("Jason Paul",2);
+		doctor.setDoctorPhone("9989033143",2);
+		doctor.setDoctorEmail("paul_j@gmail.com",2);
+		doctor.setDoctorDepartment("Radiology",2);
+
 		boolean flag=true;
 		while(flag==true)
 		{
@@ -468,7 +583,7 @@ public class Main {
 					}
 					System.out.println("Hello "+admin.getAdminUsername(B));
 					while(true){
-						System.out.println("What would you like to do?\nPlease enter:\n1 for adding patients.\n2 for adding doctors.\n10 for going back to the main menu.");
+						System.out.println("What would you like to do?\nPlease enter:\n1 for adding patients.\n3 for deleting patients records.\n2 for adding doctors.\n10 for going back to the main menu.");
 						choice=input.nextInt();						
 						input.nextLine();
 						int C=-1;
