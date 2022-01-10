@@ -54,11 +54,17 @@ class diagnosis{
         this.symptoms[b]=symptoms[b]+s.nextLine();
 		s.close();
     }
-    public void display() {
-    	System.out.println("The disease is");
+    public void display_diagnosis(int b) {
+		String[] arrDisease=disease[b].split(" ",0);
+		String[] arrSymptoms= symptoms[b].split(" ",0);
+		System.out.println("S.No\t\tDisease\t\t\tSymptoms");
+		for(int i=0;i<arrSymptoms.length;i++){
+			System.out.println(i+"\t\t"+arrDisease[i]+"\t\t\t"+arrSymptoms[i]);
+		}
+     	/*System.out.println("The disease is");
         System.out.println(disease);
         System.out.println("And symptoms are");
-        System.out.println(symptoms);
+        System.out.println(symptoms);*/
     }
 }
 // class for prescriptions and lab reports
@@ -71,6 +77,7 @@ class prescriptions_labtest extends diagnosis {
 	String[] test_cost = new String[1000];
 	String[] lab_test = new String[10];
 	float lab_cost[] = new float[10];
+
 
 	void intialize(){
 		for(int i=0;i<1000;i++){
@@ -103,7 +110,14 @@ class prescriptions_labtest extends diagnosis {
 		System.out.println("Enter the test number");
 		this.test_name[b] = test_name[b]+input.nextLine();
 	}
-
+	void display_test_name(int b){
+		String[] arrLab= test_name[b].split(" ",0);
+		int[] lab_number= new int[arrLab.length];
+		for(int i=0;i<arrLab.length;i++){
+			lab_number[i]=Integer.parseInt(arrLab[i]);
+			System.out.println(lab_test[lab_number[i]]);
+		}
+	}
 	public void display_prescription(int b) {
 		patient patient_new = new patient();
 		System.out.println("Name of the patient: "+patient_new.getPatientName(b));
@@ -125,19 +139,101 @@ class prescriptions_labtest extends diagnosis {
 	void display_labreport(int b, int lab_no){
 		patient patient_new = new patient();
 		if(lab_no==0){
+			System.out.println("                                  LAB REPORT                                              ");
 			System.out.println("-----------------------------------------------------------------------------------------");
 			System.out.println("Patient Name: "+patient_new.getPatientName(b));
+			System.out.println("Patient Name: "+patient_new.getPatientAge(b));
 			System.out.println("Test name: "+test_name[b]);
-			System.out.println("Haem");
+			System.out.println("Haemoglobin : 10.0 to 17.7 g/dL");
+			double x=10.0;
+		    double y=17.7;
+		    double random = x-((int)Math.round((Math.random())*(x-y)));
+	        System.out.println("The haemoglobin level in your blood:"+random);
+	        System.out.println("WBC : 3.5 to 10.5 billion/L");
+	        double a=3.5;
+		    double c=10.5;
+		    double WBC = a-((int)Math.round((Math.random())*(a-c)));
+	        System.out.println("The WBC level in your blood :" + WBC + "billion/L");
+	        System.out.println("Platelets : 150 to 450 billion/L");
+	        double z=150;
+		    double e=450;
+		    double platelets = z-((int)Math.round((Math.random())*(z-e)));
+	        System.out.println("The platelets level in your blood :" + platelets + "billion/L");
+			
+			
+			
+			
+			//double l = (double) (10.0 + (int)(Math.random() * 17.7));
+			//System.out.println("Haemoglobin level :"+ l + "g/dL");
+			
+			/*int randomPWD = (int) (Math.random() * 90000);
+			patient_password[b] = "PWD_" + randomPWD;*/
 		}
 		if(lab_no==1){
+			System.out.println("                                  LAB REPORT                                              ");
+			System.out.println("-----------------------------------------------------------------------------------------");
+			System.out.println("Patient Name: "+patient_new.getPatientName(b));
+			System.out.println("Patient Name: "+patient_new.getPatientAge(b));
+			System.out.println("Test name: "+test_name[b]);
+			System.out.println("Epinephrine : 0 to 20 mug/24h");
+			double x1=0;
+		    double y1=20;
+		    double E = x1-((int)Math.round((Math.random())*(x1-y1)));
+	        System.out.println("The Epinephrine level in your level:"+ E + " mug/24h");
+	        System.out.println("Dopamine : 65 to 400 mug/24h");
+			double x2=65;
+		    double y2=400;
+		    double D = x2-((int)Math.round((Math.random())*(x2-y2)));
+	        System.out.println("The Dopamine level in your level:"+ D + " mug/24h");
+	        System.out.println("Metanephrine : 0 to 1000 mug/24h");
+			double x3=0;
+		    double y3=1000;
+		    double M = x3-((int)Math.round((Math.random())*(x3-y3)));
+	        System.out.println("The Metanephrine level in your level:"+ M + " mug/24h");
 
 		}
 		if(lab_no==2){
-
+			System.out.println("                                  LAB REPORT                                              ");
+			System.out.println("-----------------------------------------------------------------------------------------");
+			System.out.println("Patient Name: "+patient_new.getPatientName(b));
+			System.out.println("Patient Name: "+patient_new.getPatientAge(b));
+			System.out.println("Test name: "+test_name[b]);
+			System.out.println("Thyroxine : 4.5 to 12 mug/24h");
+			double y1=4.5;
+		    double z1=12;
+		    double T = y1-((int)Math.round((Math.random())*(y1-z1)));
+	        System.out.println("The Thyroxine level in your level:"+ T + " ug/dL");
+	        System.out.println("TSH : 0.450 to 4.500 uIU/mL");
+			double t1=0.450;
+		    double t2=4.500;
+		    double T1 = t1-((int)Math.round((Math.random())*(t1-t2)));
+	        System.out.println("The TSH level in your level:"+ T1 + " mug/24h");
+	        System.out.println("Trioiodothyronine : 2.0 to 4.4 pg/mL");
+			double i1=2.0;
+		    double i2=4.4;
+		    double T2 = i1-((int)Math.round((Math.random())*(i1-i2)));
+	        System.out.println("The Triiodothyronine level in your level:"+ T2 + " mug/24h");
+		}
+		if(lab_no==3) {
+			System.out.println("                                  LAB REPORT                                              ");
+			System.out.println("-----------------------------------------------------------------------------------------");
+			System.out.println("Patient Name: "+patient_new.getPatientName(b));
+			System.out.println("Patient Name: "+patient_new.getPatientAge(b));
+			System.out.println("Test name: "+test_name[b]);
+			System.out.println("Blood Glucose(F) : 60 to 100 mgs/dl");
+			double z1=60;
+		    double z2=100;
+		    double B = z1-((int)Math.round((Math.random())*(z1-z2)));
+	        System.out.println("The Blood Glucose(F) level in your level:"+ B + " ug/dL");
+	        System.out.println("Blood Glucose(PP) : 60 to 100 mgs/dl");
+			double s1=100;
+		    double s2=150;
+		    double G = s1-((int)Math.round((Math.random())*(s1-s2)));
+	        System.out.println("The Blood Glucose(PP) level in your level:"+ G + " ug/dL");
 		}
 	}
 }
+
 
 // class for patients which includes details like patient name, patient
 // username, age, etc and also methods to get and set the data.
@@ -665,7 +761,7 @@ public class Main {
 								System.out.println("Login Successful!");
 							}	
 							while(true){
-								System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Change username and password.\n4.Get doctor details.\n10.To go back to main menu.\n");				
+								System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Change username and password.\n4.Get doctor details.\n5 to get diagnosis details\n6. to display prescription\n7 to display lab report.\n8 to display the bill.\n10.To go back to main menu.\n");				
 							ch=input.nextInt();
 							input.nextLine();
 							if(ch==1){
@@ -711,6 +807,39 @@ public class Main {
 							patient.setPatientPassword(changePassword,B);
 							System.out.println("Username and password changed succesfuly.");						
 						  }
+						  if(ch==4){
+							  System.out.println("Details of Doctor: ");
+							  System.out.println("Doctor Name\t\tDepartment\t\tPhone NO.");
+							  for(int i=0;i<3;i++){
+								  System.out.println(doctor.getDoctorName(i)+"\t\t"+doctor.getDoctorDepartment(i)+"\t\t"+doctor.getDoctorPhone(i));
+							  }
+						  }
+						  if(ch==5){
+							  System.out.println("Diagnosis Details: ");
+							  diagnosis.display_diagnosis(B);
+						  }
+						  if(ch==6){
+							  System.out.println("Prescription:");
+							  prescriptions.display_prescription(B);
+						  }
+						  if(ch==7){
+							  System.out.println("You have taken tests for:");
+							  prescriptions.display_test_name(B);
+							  while(true){
+									System.out.println("Enter:\n0 for Blood test\n1 for Urine Test\n2 for Thyroid Test\n3 for Diabetes Test");
+									int num=input.nextInt();
+									input.nextLine();
+									prescriptions.display_labreport(B,num);
+									System.out.println("Do you want to see another report?\nPress 'y' to continue\nelse press any other key.");
+									String cha=input.nextLine();
+									if(cha.equals("y")){
+										continue;
+									}
+									else{
+										break;
+									}
+							  }
+						  }
 						  if(ch==10){
 							  break;
 						  }
@@ -734,7 +863,7 @@ public class Main {
 						}
 					}
 					while(true){
-						System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Change username and password.\n4.Get doctor details.\n10.To go back to main menu.\n");				
+						System.out.println("What would you like to do?\n1.Book an appointment.\n2.View the appointment schedule.\n3.Change username and password.\n4.Get doctor details.\n5 to get diagnosis details\n6. to display prescription\n7 to display lab report.\n8 to display the bill.\n10.To go back to main menu.\n");								
 					ch=input.nextInt();
 					input.nextLine();
 					if(ch==1){
@@ -780,6 +909,39 @@ public class Main {
 					patient.setPatientPassword(changePassword,B);
 					System.out.println("Username and password changed succesfuly.");						
 				  }
+				  if(ch==4){
+					System.out.println("Details of Doctor: ");
+					System.out.println("Doctor Name\t\tDepartment\t\tPhone NO.");
+					for(int i=0;i<3;i++){
+						System.out.println(doctor.getDoctorName(i)+"\t\t"+doctor.getDoctorDepartment(i)+"\t\t"+doctor.getDoctorPhone(i));
+					}
+				}
+				if(ch==5){
+					System.out.println("Diagnosis Details: ");
+					diagnosis.display_diagnosis(B);
+				}
+				if(ch==6){
+					System.out.println("Prescription:");
+					prescriptions.display_prescription(B);
+				}
+				if(ch==7){
+					System.out.println("You have taken tests for:");
+					prescriptions.display_test_name(B);
+					while(true){
+						  System.out.println("Enter:\n0 for Blood test\n1 for Urine Test\n2 for Thyroid Test\n3 for Diabetes Test");
+						  int num=input.nextInt();
+						  input.nextLine();
+						  prescriptions.display_labreport(B,num);
+						  System.out.println("Do you want to see another report?\nPress 'y' to continue\nelse press any other key.");
+						  String cha=input.nextLine();
+						  if(cha.equals("y")){
+							  continue;
+						  }
+						  else{
+							  break;
+						  }
+					}
+				}
 				  if(ch==10){
 					  break;
 				  }
@@ -816,7 +978,7 @@ public class Main {
 						}
 						while(true){
 							System.out.println("What would you like to do?");
-							System.out.println("Enter:\n1 to change username and password\n2 for prescribing medicines\n3 for prescribing lab tests.\n10 to go back to the main menu");
+							System.out.println("Enter:\n1 to change username and password\n2 for diagnosing the patient.\n3 for prescribing medicines and any labtests\n4 for viewing patient details.\n10 to go back to the main menu");
 						ch=input.nextInt();
 						input.nextLine();
 						if(ch==1){
@@ -829,10 +991,74 @@ public class Main {
 							System.out.println("Username and password changed succesfuly.");
 						}
 						if(ch==2){
-
+							while(true){
+								System.out.println("Enter patient's name.");
+								String pname = input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Please enter the diseases and symptoms seperated by a 'SPACE'.");
+								diagnosis.disease_ask(C);
+								diagnosis.symptoms_ask(C);
+								break;
+							}
 						}
 						if(ch==3){
-
+							while(true){
+								System.out.println("Enter patient's name.");
+								String pname = input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Enter the medicine and dosage seperated by a 'SPACE'.");
+								prescriptions.name_ask(C);
+								prescriptions.dosage_ask(C);
+								System.out.println("Do you want to recommend any lab tests?\nPress:\n'y' if yes\nany other key if no.");
+								String x= input.nextLine();
+								if(x.equals("y")){
+									System.out.println("Enter:\n0 for Blood test\n1 for Urine Test\n2 for Thyroid Test\n3 for Diabetes Test");
+									System.out.println("(Seperate the numbers with a 'SPACE' if you want to recommend more than 1 test)");
+									prescriptions.test_name_ask(C);									
+								}
+								break;
+							}
+						}
+						if(ch==4){
+							while(true){
+								System.out.println("Enter the patient's name.");
+								String pname=input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Basic Details of patient:");
+								patient.display_patient(C);
+								System.out.println("Diagnosis: ");
+								diagnosis.display_diagnosis(C);
+							}
 						}
 						if(ch==10){
 							break;
@@ -857,7 +1083,7 @@ public class Main {
 					}
 					while(true){
 						System.out.println("What would you like to do?");
-						System.out.println("Enter:\n1 to change username and password\n2 for prescribing medicines\n3 for prescribing lab tests.\n10 to go back to the main menu");
+						System.out.println("Enter:\n1 to change username and password\n2 for diagnosing the patient.\n3 for prescribing medicines and any labtests\n4 for viewing patient details.\n10 to go back to the main menu");
 						ch=input.nextInt();
 						input.nextLine();
 						if(ch==1){
@@ -870,10 +1096,74 @@ public class Main {
 							System.out.println("Username and password changed succesfuly.");
 						}
 						if(ch==2){
-
+							while(true){
+								System.out.println("Enter patient's name.");
+								String pname = input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Please enter the diseases and symptoms seperated by a 'SPACE'.");
+								diagnosis.disease_ask(C);
+								diagnosis.symptoms_ask(C);
+								break;
+							}
 						}
 						if(ch==3){
-
+							while(true){
+								System.out.println("Enter patient's name.");
+								String pname = input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Enter the medicine and dosage seperated by a 'SPACE'.");
+								prescriptions.name_ask(C);
+								prescriptions.dosage_ask(C);
+								System.out.println("Do you want to recommend any lab tests?\nPress:\n'y' if yes\nany other key if no.");
+								String x= input.nextLine();
+								if(x.equals("y")){
+									System.out.println("Enter:\n0 for Blood test\n1 for Urine Test\n2 for Thyroid Test\n3 for Diabetes Test");
+									System.out.println("(Seperate the numbers with a 'SPACE' if you want to recommend more than 1 test)");
+									prescriptions.test_name_ask(C);									
+								}
+								break;
+							}
+						}
+						if(ch==4){
+							while(true){
+								System.out.println("Enter the patient's name.");
+								String pname=input.nextLine();
+								int C=-1;
+								for(int i=0;i<1000;i++){
+									if(pname.equals(patient.getPatientName(i))){
+										C=i;
+										break;
+									}
+								}
+								if(C==-1){
+									System.out.println("The name is not in our records. Try again!");
+									continue;
+								}
+								System.out.println("Basic Details of patient:");
+								patient.display_patient(C);
+								System.out.println("Diagnosis: ");
+								diagnosis.display_diagnosis(C);
+							}
 						}
 						if(ch==10){
 							break;
