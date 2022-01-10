@@ -585,7 +585,7 @@ public class Main {
 													
 							}	
 							if(ch==2) {
-								
+								patient.display_appointment(B);
 						  }
 						  if(ch==3){
 							System.out.println("Enter the new username to be changed.");
@@ -653,7 +653,7 @@ public class Main {
 						}								
 					}	
 					if(ch==2) {
-						System.out.println("Enter the");
+						patient.display_appointment(B);
 					   }
 				  
 				  if(ch==3){
