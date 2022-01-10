@@ -191,6 +191,8 @@ class patient extends Appointments implements login {
 		System.out.println("Username: " + patient_username[b]);
 		System.out.println("Apointment date: " + appointment_date[b]);
 		System.out.println("Apointment time: " + appointment_time[b]);
+		System.out.println("Illness : "+illness[b]);
+		System.out.println("Name of the doctor : "+Doctor_name[b]);
 	}
 
 	// methods for verifying patient username and password.
@@ -422,6 +424,7 @@ public class Main {
 		patient patient=new patient();
 		doctor doctor=new doctor();
 		admin admin=doctor.new admin();
+		//Appointments appointment=new Appointments();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
 				admin.setAdminUsername("abcedf",j);
