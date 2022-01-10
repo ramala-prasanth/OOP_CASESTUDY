@@ -558,7 +558,7 @@ class doctor extends Appointments implements login {
 		}
 		return val;
 	}
-
+}
 // class for admin which inlcudes the admin username and password and methods
 // for verifying the username and password.
 class admin implements login {
@@ -610,9 +610,9 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner input=new Scanner(System.in);
 		int B;
+		admin admini=new admin();
 		patient patient=new patient();
 		doctor doctor=new doctor();
-		admin admin=doctor.new admin();
 		Appointments appointment=new Appointments();
 		diagnosis diagnosis = new diagnosis();
 		prescriptions_labtest prescriptions = new prescriptions_labtest();
@@ -622,13 +622,13 @@ public class Main {
 		appointment.initialValues();
 		//creating admin usernames and passwords.
 			for(int j=0;j<1000;j++){
-				admin.setAdminUsername("abcedf",j);
-				admin.setAdminPassword("PASSWORD",j);
+				admini.setAdminUsername("abcedf",j);
+				admini.setAdminPassword("PASSWORD",j);
 			}
-			admin.setAdminUsername("prasanth_r",0);
-			admin.setAdminUsername("lokesh_d",1);
-			admin.setAdminUsername("preetham_a",2);
-			admin.setAdminUsername("dheepthi_d",3);			
+			admini.setAdminUsername("prasanth_r",0);
+			admini.setAdminUsername("lokesh_d",1);
+			admini.setAdminUsername("preetham_a",2);
+			admini.setAdminUsername("dheepthi_d",3);			
 		//creating duplicate names for patients
 		for(int j=0;j<1000;j++){
 			patient.setPatientName("abcdefg",j);
@@ -664,7 +664,7 @@ public class Main {
 				while(true){
 					System.out.println("Enter your Username:");
 					String AdminUsername=input.nextLine();
-					B=admin.username_verification(AdminUsername);
+					B=admini.username_verification(AdminUsername);
 					//System.out.println(verify);
 					if(B==-1){
 						System.out.println("The Administrator does not exist!\nTry again!");
@@ -672,12 +672,12 @@ public class Main {
 					}
 					System.out.println("Enter your password:");
 					String AdminPassword=input.nextLine();
-					B=admin.password_verification(AdminPassword);
+					B=admini.password_verification(AdminPassword);
 					if(B==-1){
 						System.out.println("The password is incorrect! Try again!");
 						continue;
 					}
-					System.out.println("Hello "+admin.getAdminUsername(B));
+					System.out.println("Hello "+admini.getAdminUsername(B));
 					while(true){
 						System.out.println("What would you like to do?\nPlease enter:\n1 for adding patients.\n3 for deleting patients records.\n2 for adding doctors.\n10 for going back to the main menu.");
 						choice=input.nextInt();						
@@ -1179,5 +1179,5 @@ public class Main {
 		input.close();
 	}
 	}
-}
+
 
